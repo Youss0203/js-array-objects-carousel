@@ -45,6 +45,11 @@ document.querySelector('.button-after').addEventListener('click', function(){
      changeToSlide(activeIndex);
  })
 
+ clock = setInterval(function(){
+    document.querySelector('.button-after').click();
+}, 3000);
+
+
 
 /* FUNZIONI */
 
