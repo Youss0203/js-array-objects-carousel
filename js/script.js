@@ -23,27 +23,45 @@ const images = [
 ];
 
 
-const wrapperEl=document.querySelector("div.wrapper")
+const slidesWrapperEl =document.querySelector('div.container');
 
-for (let i= 0; i < images.length; i++){
+let activeIndex = 0;
 
-    const ImageElement = document.createElement ('img');
-    
-
-   wrapperEl.appendChild(ImageElement);
-   
-
-    ImageElement.src = images[i].image;
-};
+ images.forEach((element, index) => {
+    const classesForActiveSlide = (index === activeIndex) ? 'active' : '';
+     slidesWrapperEl.innerHTML += generateNewSlide(element.image, element.title, element.text, index, classesForActiveSlide);
+     
+ })
 
 
+  document.querySelector('button-before').addEventListener('click', function(){
+    if (--activeIndex < 0) activeIndex = images.length - 1;
+    changeToSlide(activeIndex);
+})
 
 
+document.querySelector('button-after').addEventListener('click', function(){
+    if (++activeIndex >= images.length) activeIndex = 0;
+     changeToSlide(activeIndex);
+ })
 
 
+/* FUNZIONI */
 
+function generateNewSlide(imgSrc, title, description, index, classesToAdd){
+    return `
+    <div class="container ${classesToAdd}" carousel-item="${index}">
+            <img  src="${imgSrc}">
+            <div class="text-container">
+                <h1>${title}</h1>
+                <p>${description}</p>
+            </div>`;
+ }
 
-
+ function changeToSlide(newIndex){
+    document.querySelector('div.my-carousel-item.active').classList.remove('active');
+    document.querySelector('div.my-carousel-item[carousel-item="' + newIndex +'"]').classList.add('active');
+ }
 
 
 
