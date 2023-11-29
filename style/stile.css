@@ -34,9 +34,7 @@ img{
     right:0;
     padding:0 3rem;
 }
-iv.my-carousel-item{
-    display: none;
-}
+
 div.my-carousel-item.active{
     display: block;
 }
